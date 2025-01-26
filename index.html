@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boletim Tecnológico</title>
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(135deg, #333, #000);
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 36px;
+      margin: 0;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .container {
+      width: 90%;
+      margin: auto;
+      padding: 20px 0;
+    }
+
+    .edition-info {
+      text-align: center;
+      font-size: 16px;
+      color: #666;
+      margin: 15px 0;
+    }
+
+    .section-title {
+      color: #333;
+      font-size: 28px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #333;
+      padding-bottom: 5px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    /* Configuração das seções para centralizar os cards */
+    .main-section, .innovation-section, .deu-ruim-section, .news-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* Centraliza os cards horizontalmente */
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 300px; /* Define uma largura fixa para os cards */
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 30px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    /* Estilos para os modais */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 60%;
+      height: 80%;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .modal-content img {
+      width: 80%;
+      height: auto;
+      margin: 20px auto;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .modal-content p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #555;
+      text-align: justify;
+      margin-top: 20px;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: #333;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    /* Estilos responsivos */
+    @media (max-width: 1024px) {
+      .modal-content {
+        width: 80%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .modal-content {
+        width: 80%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .main-section, .innovation-section, .deu-ruim-section, .news-section {
+        flex-direction: column;
+        align-items: center; /* Centraliza os cards em telas pequenas */
+      }
+
+      .card h2 {
+        font-size: 16px;
+      }
+
+      .card img {
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+
+      header h1 {
+        font-size: 28px;
+      }
+
+      .modal-content {
+        width: 95%;
+        height: 90%;
+        padding: 15px;
+      }
+
+      .modal-content h2 {
+        font-size: 20px;
+      }
+
+      .modal-content p {
+        font-size: 16px;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Boletim Tecnológico</h1>
+  </header>
+
+  <div class="edition-info">
+    <p>Edição de 25/01/2025</p>
+  </div>
+
+  <!-- Seção: Inteligência Artificial -->
+  <h2 class="section-title">Inteligência Artificial</h2>
+  <div class="main-section">
+    <!-- Card 1 -->
+    <div class="card" id="card1">
+      <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/OpenAI-Operator-02-1536x864.jpg" 
+           alt="OpenAI lança prévia do Operator, IA que mexe no computador para você">
+      <h2>OpenAI lança prévia do Operator, IA que mexe no computador para você</h2>
+    </div>
+
+    <div class="card" id="card2">
+        <img src="https://t.ctcdn.com.br/hH2_Lz2m2cS7t82ygxcfFAE0eNQ=/1024x576/smart/i975219.png" 
+             alt="OpenAI Operator, Copilot e mais: conheça 4 agentes de IA">
+        <h2>OpenAI Operator, Copilot e mais: conheça 4 agentes de IA</h2>
+      </div>
+
+      <div class="card" id="card3">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2024/11/inteligencia-artificial-1920x1080.jpg" 
+             alt="ChatGPT, Gemini e Copilot: 8 tarefas que ficam mais fáceis quando usamos a inteligência artificial">
+        <h2>8 tarefas mais fáceis quando usamos a inteligência artificial</h2>
+      </div>
+
+      <div class="card" id="card4">
+        <img src="https://s2-g1.glbimg.com/vKBg2XhR1o5DquYjoJIyHGFOkDg=/0x0:3840x2160/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/U/h/W65BXwSru8GNOtDZ6DJw/globo-canal-4-20250124-2000-frame-79368.jpeg" 
+             alt="Inteligência artificial: tecnologia demanda geração colossal de energia elétrica">
+        <h2>Inteligência artificial: tecnologia demanda geração colossal de energia elétrica</h2>
+      </div>
+
+      <div class="card" id="card5">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2024/10/Destaque-Inteligencia-artificial-02-1536x864.jpg" 
+             alt="O que acontece ao misturar IA e computação quântica?">
+        <h2>O que acontece ao misturar IA e computação quântica?</h2>
+      </div>
+
+      <div class="card" id="card6">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/iStock-1451433309-1920x1080.jpg" 
+             alt="Nova IA pode diferenciar pneumonia de Covid-19">
+        <h2>Nova IA pode diferenciar pneumonia de Covid-19</h2>
+      </div>
+  </div>
+
+
+  <!-- Seção: Inovação Tecnológica -->
+  <h2 class="section-title">Inovação Tecnológica</h2>
+  <div class="innovation-section">
+    <!-- Card 7 -->
+    <div class="card" id="card7">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/amazon-culos-inteligente-1920x1080.jpg" 
+             alt="A nova onda dos smartglasses">
+        <h2>A nova onda dos smartglasses</h2>
+      </div>
+
+      <div class="card" id="card8">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/rob-indstria-1920x1080.jpg" 
+             alt="Conheça as ‘escolas virtuais’ para deixar robôs mais inteligentes">
+        <h2>‘Escolas Virtuais’ para deixar robôs mais inteligentes</h2>
+      </div>
+
+      <div class="card" id="card9">
+        <img src="https://classic.exame.com/wp-content/uploads/2023/04/reator.webp" 
+             alt="“Sol artificial” da China mais do que dobra recorde de fusão nuclear">
+        <h2>“Sol artificial” da China mais do que dobra recorde de fusão nuclear</h2>
+      </div>
+
+      <div class="card" id="card10">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/Destaque-Bateria-pele-humana-1920x1080.jpg" 
+             alt="Pesquisadores criam tecnologia que carrega na pele">
+        <h2>Pesquisadores criam tecnologia que carrega na pele</h2>
+      </div>
+
+      <div class="card" id="card11">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/semicondutores-1920x1080.jpg" 
+             alt="Novos semicondutores pode estar na mistura de silício com materiais 2D">
+        <h2>Novos semicondutores pode estar na mistura de silício com materiais 2D</h2>
+      </div>
+
+      <div class="card" id="card12">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/painis-solares-1920x1080.jpg" 
+             alt="Maior usina de energia solar do mundo vai operar 24 horas por dia">
+        <h2>Maior usina de energia solar do mundo vai operar 24 horas por dia</h2>
+      </div>
+  </div>
+
+
+  <!-- Seção: Deu Ruim -->
+  <h2 class="section-title">Deu Ruim</h2>
+  <div class="deu-ruim-section">
+    <!-- Card 13 -->
+    <div class="card" id="card13">
+        <img src="https://s2-g1.glbimg.com/4unQC_YvgolrjD-oTSwdxT2Ywdk=/0x0:4715x3108/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/o/n/14q7A2QaibuftNRtdL0A/2025-01-21t140100z-1219518565-rc2xdca4xlhx-rtrmadp-3-usa-trump-inauguration.jpg" 
+             alt="Musk ameaça retaliar senadores que não votarem a favor de indicados de Trump ao governo">
+        <h2>Musk ameaça retaliar senadores que não votarem a favor de indicados de Trump ao governo</h2>
+      </div>
+
+      <div class="card" id="card14">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2024/08/tiktok-e1726494815684-1920x1080.jpg" 
+             alt="TikTok banido nos EUA: usuários apelam para VPN – e se decepcionam">
+        <h2>TikTok banido nos EUA: usuários apelam para VPN – e se decepcionam</h2>
+      </div>
+
+      <div class="card" id="card15">
+        <img src="https://tm.ibxk.com.br/2025/01/24/24181404240006.jpg?ims=1280x480" 
+             alt="Mudança na faixa de 6 GHz gera crise entre provedores e Anatel e pode afetar o Wi-Fi">
+        <h2>Mudança na faixa de 6 GHz gera crise entre provedores e Anatel e pode afetar o Wi-Fi</h2>
+      </div>
+
+      <div class="card" id="card16">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2024/12/shutterstock_2521120403-1920x1080.jpg" 
+             alt="Samsung reduz pela metade investimentos em fabricação de chips">
+        <h2>Samsung reduz pela metade investimentos em fabricação de chips</h2>
+      </div>
+
+  </div>
+
+
+  <!-- Seção: Notícias Variadas -->
+  <h2 class="section-title">Notícias Variadas</h2>
+  <div class="news-section">
+    <!-- Card 17 -->
+    <div class="card" id="card17">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2024/08/sls-block-1b-1536x892.jpg" 
+             alt="Trump pode mudar a NASA e o futuro da exploração espacial">
+        <h2>Trump pode mudar a NASA e o futuro da exploração espacial</h2>
+      </div>
+
+      <div class="card" id="card18">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/cientista-alterando-dna-1920x1080.png" 
+             alt="5 avanços tecnológicos que aconteceram em 2024">
+        <h2>5 avanços tecnológicos que aconteceram em 2024</h2>
+      </div>
+
+      <div class="card" id="card19">
+        <img src="https://t.ctcdn.com.br/F3TMtbXMqQZlLgap-T5S31dNG5g=/1024x576/smart/i972443.jpeg" 
+             alt="5 coisas que perdemos nos celulares atuais, mas que eram úteis">
+        <h2>5 coisas que perdemos nos celulares atuais, mas que eram úteis</h2>
+      </div>
+
+      <div class="card" id="card20">
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/shutterstock_1733696006.jpg" 
+             alt="Como são as colaborações globais em IA, especialmente entre China e EUA?">
+        <h2>Como são as colaborações globais em IA, especialmente entre China e EUA?</h2>
+      </div>
+  </div>
+
+  <!-- ========================== 
+       MÓDULOS (MODAIS) 
+       ========================== -->
+
+<!-- Modal 1 -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>OpenAI Lança o Operator, IA que Automatiza Tarefas no Computador</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/OpenAI-Operator-02-1536x864.jpg" alt="Imagem representativa sobre o Operator da OpenAI">
+        
+        <p>A OpenAI lançou a prévia de pesquisa do Operator, um agente de inteligência artificial (IA) que promete automatizar tarefas diretamente no computador. O Operator é capaz de realizar ações como preencher formulários, fazer compras online e até reservar mesas em restaurantes, interagindo com páginas da web de forma autônoma.</p>
+        <p>Inicialmente, a ferramenta está disponível para assinantes do ChatGPT Pro nos Estados Unidos, mas a empresa planeja expandi-la para usuários dos planos Plus, Team e Enterprise.</p>
+  
+        <strong>Como funciona o Operator?</strong><br>
+        <p>Desenvolvido com um modelo chamado "Agente Usando Computador", o Operator combina a visão avançada do GPT-4 com técnicas de aprendizado por reforço. Ele pode visualizar capturas de tela, interagir com navegadores, digitar, clicar e rolar páginas — tudo sem depender de integrações de API personalizadas.</p>
+        <p>Além disso, a IA foi projetada para identificar quando precisa da intervenção do usuário, especialmente ao lidar com informações sensíveis, como logins. Ela também deve solicitar aprovação antes de executar ações críticas, como enviar e-mails.</p>
+  
+        <strong>Parcerias e limitações</strong><br>
+        <p>Para oferecer experiências mais práticas, a OpenAI colabora com empresas como DoorDash, Instacart, OpenTable, Uber e outras. Contudo, a empresa reconhece que o Operator ainda enfrenta desafios em tarefas mais complexas, como criação de slides e gerenciamento de calendários.</p>
+  
+        <strong>A era dos agentes de IA</strong><br>
+        <p>Com o lançamento do Operator, a OpenAI reforça sua posição na corrida dos agentes de IA, um setor que já atrai colaborações e atenção global. Apesar das limitações iniciais, a ferramenta representa um passo significativo rumo à automação assistida por inteligência artificial.</p>
+    </div>
+  </div>
+  
+  <!-- Modal 2 -->
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Conheça 4 Agentes de IA Que Estão Revolucionando Tarefas</h2>
+        <img src="https://t.ctcdn.com.br/hH2_Lz2m2cS7t82ygxcfFAE0eNQ=/1024x576/smart/i975219.png" alt="Imagem representativa sobre agentes de IA revolucionários">
+        
+        <p>Os agentes de inteligência artificial (IA) têm ganhado destaque por sua capacidade de automatizar tarefas e simplificar atividades do dia a dia. Aqui está um resumo dos quatro principais agentes de IA disponíveis no mercado atualmente.</p>
+  
+        <strong>1. OpenAI Operator</strong><br>
+        <p>O Operator é o mais recente lançamento da OpenAI. Esse agente utiliza o modelo GPT-4 e é capaz de realizar tarefas diretamente em sites e aplicativos, como preencher formulários, fazer compras online e até reservar restaurantes. Ele simula ações humanas, como digitar, clicar e rolar páginas da web.</p>
+        <p><strong>Status:</strong> Em fase de pesquisa, disponível para assinantes do ChatGPT Pro nos EUA.<br>
+        <strong>Planos futuros:</strong> A OpenAI planeja ampliar o acesso para os usuários dos planos Plus, Team e Enterprise.<br>
+        <strong>Limitações:</strong> Ainda apresenta dificuldades com interfaces complexas.</p>
+  
+        <strong>2. Microsoft Copilot</strong><br>
+        <p>Integrado ao Microsoft 365, o Copilot oferece suporte em ferramentas como Word, Excel e PowerPoint. Ele pode gerar relatórios, criar apresentações e resumir reuniões no Teams.</p>
+        <p><strong>Destaque:</strong> Em 2024, foi lançado o Copilot Studio, que permite empresas criarem seus próprios agentes de IA personalizados.<br>
+        <strong>Disponibilidade:</strong> Incluído nos planos empresariais do Microsoft 365.</p>
+  
+        <strong>3. Claude (Anthropic)</strong><br>
+        <p>Desenvolvido pela Anthropic, o Claude permite interagir com computadores usando comandos simples. Ele pode preencher formulários, analisar grandes volumes de dados e automatizar interações em atendimentos ao cliente.</p>
+        <p><strong>Aplicações:</strong> Muito usado em empresas para tarefas de atendimento e decisões baseadas em dados.<br>
+        <strong>Diferencial:</strong> Oferece uma API poderosa que conecta dados locais e da internet.</p>
+  
+        <strong>4. Google Gemini</strong><br>
+        <p>O Gemini, da Google, é uma plataforma multimodal que entende texto, imagens e gráficos. Sua mais recente atualização, o Gemini Live, introduziu novas funções como enviar fotos, vídeos e arquivos para interações mais completas com o assistente.</p>
+        <p><strong>Integrações:</strong> Funciona com apps como Google Maps, Gmail e agora até com aplicativos Samsung.<br>
+        <strong>Exemplo de uso:</strong> Permite pesquisar eventos e criar lembretes automaticamente no celular.</p>
+  
+        <strong>O que são agentes de IA?</strong><br>
+        <p>Agentes de IA são softwares projetados para executar tarefas de forma independente, com base em dados coletados de diversas fontes. Eles são amplamente utilizados em cenários como atendimento ao cliente, automação de trabalho e organização pessoal, promovendo eficiência e conveniência.</p>
+        <p>A era dos agentes de IA está apenas começando, e com avanços constantes, eles prometem revolucionar a forma como interagimos com a tecnologia.</p>
+    </div>
+  </div>
+  
+  <!-- Modal 3 -->
+<div id="modal3" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>8 Tarefas Simplificadas com ChatGPT, Gemini e Copilot</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2024/11/inteligencia-artificial-1920x1080.jpg" alt="Imagem representativa sobre tarefas simplificadas com IA">
+        
+        <p>As ferramentas de inteligência artificial (IA), como ChatGPT, Gemini e Copilot, são cada vez mais úteis tanto na vida pessoal quanto no ambiente de trabalho. Veja como essas tecnologias podem facilitar 8 tarefas do dia a dia.</p>
+  
+        <strong>1. Criação e edição de textos</strong><br>
+        <p>Com as IAs, é possível criar textos originais, revisar documentos e até traduzi-los. O ChatGPT, Gemini e Copilot oferecem comandos como “escreva um texto” ou “revise o seguinte texto”. Além disso, ferramentas como Gemini e Copilot se integram a Google Docs e Word para maior praticidade.</p>
+  
+        <strong>2. Pesquisa na internet</strong><br>
+        <p>Plataformas como o Gemini (com o modo "Deep Research") e o ChatGPT Search permitem realizar buscas detalhadas, sumarizar informações e organizar ideias de forma eficiente. Ideal para estudos, planejamento ou tarefas diárias.</p>
+  
+        <strong>3. Auxílio nos estudos</strong><br>
+        <p>Os chatbots são excelentes aliados acadêmicos, ajudando a tirar dúvidas e complementar pesquisas. Exemplos de comandos úteis incluem “Explique o que é fotossíntese” ou “Qual a fórmula da gravidade?”.</p>
+  
+        <strong>4. Busca por inspiração</strong><br>
+        <p>Seja para decorar sua casa, tirar uma foto criativa ou elaborar um projeto no trabalho, as IAs oferecem sugestões úteis. Por exemplo: “Quais cores combinam para uma sala de estar moderna?”.</p>
+  
+        <strong>5. Organização de tarefas</strong><br>
+        <p>ChatGPT, Gemini e Copilot ajudam na criação de listas de pendências e planejadores personalizados. Além disso, eles podem sugerir cardápios, criar receitas e ajudar na rotina doméstica.</p>
+  
+        <strong>6. Suporte à programação</strong><br>
+        <p>Os desenvolvedores podem utilizar as IAs para gerar códigos, corrigir erros e documentar projetos. Ferramentas como Copilot são particularmente eficientes ao trabalhar com linguagens de programação e bancos de dados.</p>
+  
+        <strong>7. Análise de dados</strong><br>
+        <p>Com IAs como Copilot e Gemini, é possível analisar grandes volumes de dados e criar relatórios diretamente em planilhas como Excel e Google Sheets. O Copilot oferece visualizações prontas para apresentações no PowerPoint, enquanto o Gemini opera diretamente no Planilhas do Google.</p>
+  
+        <strong>8. Automação de tarefas</strong><br>
+        <p>As IAs avançadas permitem automatizar tarefas repetitivas, como a redação de e-mails e a criação de relatórios. O Copilot, por exemplo, oferece amplos recursos de automação, especialmente para empresas que utilizam o Microsoft 365.</p>
+  
+        <p>Essas ferramentas estão moldando um futuro mais produtivo, onde tarefas complexas e repetitivas podem ser realizadas de forma rápida e eficiente, liberando mais tempo para atividades estratégicas. A era da inteligência artificial está apenas começando!</p>
+    </div>
+  </div>
+  
+  <!-- Modal 4 -->
+<div id="modal4" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>A Expansão da IA e os Desafios Energéticos Globais</h2>
+        <img src="https://s2-g1.glbimg.com/vKBg2XhR1o5DquYjoJIyHGFOkDg=/0x0:3840x2160/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/U/h/W65BXwSru8GNOtDZ6DJw/globo-canal-4-20250124-2000-frame-79368.jpeg" alt="Imagem representativa sobre o impacto energético da IA">
+        
+        <p>O crescimento acelerado da inteligência artificial (IA) está trazendo um impacto significativo no consumo global de energia. A Agência Internacional de Energia (AIE) estima que, até 2026, o consumo energético dos data centers — essenciais para sustentar a IA — dobrará em relação a 2022.</p>
+  
+        <strong>Consumo de energia em escala colossal</strong><br>
+        <p>A operação de data centers, como os de Barueri (SP), já consome níveis de energia comparáveis à Zona Metropolitana de Brasília. Com projetos dedicados exclusivamente à IA, como o em desenvolvimento no Rio Grande do Sul, a escala de consumo pode atingir magnitudes equivalentes a estados inteiros, como o Rio de Janeiro.</p>
+        <p>De acordo com Denis Bruno Viríssimo, gerente de inteligência artificial do IPT, o treinamento de modelos de IA pode consumir energia comparável ao uso anual de uma cidade de médio porte. Esses sistemas exigem grandes investimentos em infraestrutura, incluindo supercomputadores que operam 24 horas por dia e demandam complexos sistemas de refrigeração, responsáveis por 25% do consumo total de energia.</p>
+  
+        <strong>Impacto ambiental e sustentabilidade</strong><br>
+        <p>Além de energia, o resfriamento dos equipamentos consome água. Para cada 50 perguntas respondidas por uma IA, utiliza-se meio litro de água para manter as temperaturas adequadas.</p>
+        <p>Enquanto o Brasil se beneficia de uma matriz energética predominantemente renovável, muitos países ainda dependem de combustíveis fósseis, o que levanta questões sobre os impactos ambientais dessa expansão tecnológica. Pesquisas em andamento buscam soluções mais sustentáveis para equilibrar o avanço da IA e a preservação do meio ambiente.</p>
+  
+        <strong>O ritmo da adoção da IA</strong><br>
+        <p>O uso da IA pela população está crescendo mais rapidamente do que ocorreu com a adoção de computadores e da internet. Essa expansão exige uma preparação global para lidar com os desafios associados ao consumo de energia, reforçando a necessidade de inovação em eficiência energética e práticas sustentáveis.</p>
+        <p>À medida que a inteligência artificial continua a evoluir, a busca por um equilíbrio entre inovação e responsabilidade ambiental será essencial para garantir um futuro tecnológico sustentável.</p>
+    </div>
+  </div>
+
+  <!-- Modal 5 -->
+<div id="modal5" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Startup Explora Mistura de IA com Computação Quântica para Criar "Consciência Artificial"</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2024/10/Destaque-Inteligencia-artificial-02-1536x864.jpg" alt="Imagem representativa sobre consciência artificial">
+        
+        <p>A startup Nirvanic Consciousness Technologies, fundada por Suzanne Gildert, está explorando um território ambicioso e inédito: a fusão de inteligência artificial (IA) com computação quântica para desenvolver o que ela chama de "consciência artificial". O objetivo é criar sistemas de IA que tomem decisões de maneira mais intuitiva e "consciente" do que os modelos atuais.</p>
+  
+        <strong>O que é consciência artificial?</strong><br>
+        <p>Gildert define consciência como duas capacidades principais:</p>
+        <ul>
+            <li><strong>Experiência em primeira pessoa:</strong> A habilidade de focar em algo, como ler um livro, ignorando estímulos externos.</li>
+            <li><strong>Capacidade de escolha:</strong> Usar a informação percebida para criar opções e tomar decisões, como em um "jogo interativo".</li>
+        </ul>
+        <p>A ideia é que os sistemas quânticos, em combinação com a IA clássica, possam processar informações de maneira semelhante à forma como o cérebro humano lida com situações novas e desconhecidas, ativando uma espécie de "modo consciente".</p>
+  
+        <strong>Como funciona a integração de IA e computação quântica?</strong><br>
+        <p>Na visão da Nirvanic, o sistema seria dividido em três etapas principais:</p>
+        <ol>
+            <li><strong>Entrada de dados clássica:</strong> Sensores capturam informações no formato binário (0 e 1) e as transformam em dados quânticos.</li>
+            <li><strong>Processamento quântico:</strong> O estado quântico é "massageado" para criar múltiplas opções de ação.</li>
+            <li><strong>Colapso quântico:</strong> A medição do sistema quântico determina uma ação final, que é executada pela IA no mundo real, como controlar um robô ou interagir em um navegador.</li>
+        </ol>
+        <p>Esse processo usa a propriedade quântica de superposição, onde múltiplos estados coexistem até que uma medição seja feita, resultando em uma única decisão.</p>
+  
+        <strong>Inspiração na teoria de consciência quântica</strong><br>
+        <p>A startup se inspira na teoria Orch OR (Redução Objetiva Orquestrada), proposta pelo físico Roger Penrose e pelo anestesiologista Stuart Hameroff, que sugere que a consciência humana pode surgir de processos quânticos em microtúbulos no cérebro. Apesar de contestada, essa teoria sugere que fenômenos quânticos podem desempenhar um papel na tomada de decisões humanas.</p>
+  
+        <strong>O futuro da IA “consciente”</strong><br>
+        <p>Suzanne Gildert afirma que a meta inicial é criar sistemas que demonstrem "pequenas faíscas" de tomada de decisão consciente. Embora ainda distante de uma consciência semelhante à humana, essas IAs poderiam oferecer escolhas mais intuitivas e inovadoras, superando as limitações dos sistemas tradicionais que apenas imitam padrões.</p>
+        <p>No ritmo acelerado da tecnologia, a fusão entre IA e computação quântica pode moldar o futuro da inteligência artificial, transformando conceitos hoje vistos como distantes em realidades de impacto global.</p>
+    </div>
+  </div>
+  
+  <!-- Modal 6 -->
+<div id="modal6" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>IA Diferencia Pneumonia de Covid-19 com 97% de Precisão</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/iStock-1451433309-1920x1080.jpg" alt="Imagem representativa sobre IA na saúde e diagnósticos">
+        
+        <p>Pesquisadores na Austrália desenvolveram uma inteligência artificial (IA) capaz de diagnosticar doenças pulmonares, como pneumonia e Covid-19, com impressionantes 97% de precisão. A tecnologia, denominada TD-CNNLSTM-LungNet, combina aprendizado de máquina avançado com técnicas explicáveis para apoiar médicos na tomada de decisões e economizar tempo em diagnósticos.</p>
+  
+        <strong>Como a IA funciona?</strong><br>
+        <p>O modelo é um híbrido que integra dois tipos de inteligência artificial:</p>
+        <ul>
+            <li><strong>Rede Neural Convolucional (CNN):</strong> Identifica padrões em imagens e quadros captados em exames como ultrassons.</li>
+            <li><strong>Modelo de Memória de Curto Prazo (LSTM):</strong> Analisa dados ao longo do tempo, descartando informações irrelevantes e aprimorando a precisão.</li>
+        </ul>
+        <p>Além disso, a IA usa um método de "IA explicável", que permite aos radiologistas compreenderem as razões por trás das decisões da ferramenta, aumentando sua confiabilidade.</p>
+  
+        <strong>Resultados promissores</strong><br>
+        <p>Durante os testes, o modelo superou as ferramentas atuais de diagnóstico por IA, que apresentam taxas de precisão entre 90% e 92%. A tecnologia foi validada por profissionais médicos e promete ser uma aliada poderosa no treinamento de novos radiologistas e na agilidade de diagnósticos.</p>
+  
+        <strong>Próximos passos</strong><br>
+        <p>Os pesquisadores planejam expandir o treinamento da IA para identificar outras doenças pulmonares, incluindo:</p>
+        <ul>
+            <li>Tuberculose</li>
+            <li>Asma</li>
+            <li>Fibrose pulmonar</li>
+            <li>Doença pulmonar crônica</li>
+            <li>Câncer de pulmão</li>
+        </ul>
+        <p>Além disso, o modelo poderá ser adaptado para diferentes tipos de exames, como tomografias computadorizadas e raios X.</p>
+  
+        <p>Com a capacidade de transformar diagnósticos médicos, a IA representa um avanço significativo na saúde e no combate a doenças respiratórias.</p>
+    </div>
+  </div>
+  
+  <!-- Modal 7 -->
+<div id="modal7" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>A Nova Geração de Smartglasses Prioriza Design e Funcionalidade</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/amazon-culos-inteligente-1920x1080.jpg" alt="Imagem representativa sobre a nova geração de smartglasses">
+        
+        <p>Os smartglasses estão de volta aos holofotes, mas desta vez com um enfoque em designs discretos e funcionalidades práticas. Durante a CES 2025, realizada em Las Vegas, fabricantes como Ray-Ban Meta e Amazon apresentaram modelos que combinam tecnologia avançada com usabilidade no dia a dia.</p>
+  
+        <strong>Mais do que estilo: recursos tecnológicos</strong><br>
+        <p>Os novos óculos inteligentes trazem recursos como:</p>
+        <ul>
+            <li>Câmeras integradas</li>
+            <li>Sistema de GPS</li>
+            <li>Tradução em tempo real</li>
+        </ul>
+        <p>Ao contrário dos protótipos volumosos da década de 2010, como o Google Glass, os modelos atuais lembram acessórios tradicionais e estão focados na aceitação do mercado.</p>
+  
+        <strong>Ray-Ban Meta: foco no básico</strong><br>
+        <p>O Ray-Ban Meta, desenvolvido em parceria com a empresa de Mark Zuckerberg, promete popularizar os smartglasses com um preço inicial de US$ 200 (aproximadamente R$ 1.200). No entanto, a inclusão de funcionalidades avançadas, como realidade aumentada com projeções, elevaria os custos significativamente.</p>
+        <p>Apesar disso, representantes da Meta afirmam que o recurso pode ser adicionado futuramente.</p>
+  
+        <strong>Desafios no mercado de smartglasses</strong><br>
+        <p>O custo de produção continua sendo uma barreira importante, especialmente com a concorrência de empresas chinesas que conseguem oferecer preços mais competitivos.</p>
+        <p>Ainda assim, os avanços em realidade aumentada, inteligência artificial e tecnologias minimalistas estão expandindo o mercado, tornando os smartglasses mais acessíveis e atraentes para o público.</p>
+  
+        <strong>Futuro promissor</strong><br>
+        <p>Com um preço mais próximo dos óculos convencionais premium e designs pensados para o cotidiano, os novos smartglasses prometem superar os fracassos do passado e consolidar-se como uma tendência tecnológica prática e funcional.</p>
+    </div>
+  </div>
+
+  <!-- Modal 8 -->
+<div id="modal8" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Escolas Virtuais Aceleram o Treinamento de Robôs com IA e Gêmeos Digitais</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/rob-indstria-1920x1080.jpg" alt="Imagem representativa sobre treinamento virtual de robôs">
+        
+        <p>Pesquisadores estão revolucionando o treinamento de robôs com o uso de gêmeos digitais, inteligência artificial (IA) e o metaverso industrial, criando "escolas virtuais" que permitem a esses dispositivos aprenderem habilidades complexas de forma mais rápida e eficiente.</p>
+  
+        <strong>Simulação para Realidade (Sim2Real)</strong><br>
+        <p>Esse método substitui a programação tradicional por ambientes simulados que replicam condições reais. Assim, os robôs podem treinar em tarefas como manuseio de objetos ou resolução de problemas sem a necessidade de testar diretamente no mundo físico.</p>
+        <p>Os ambientes virtuais utilizam dados sintéticos e gêmeos digitais — representações virtuais precisas de locais e equipamentos —, permitindo que os robôs pratiquem em cenários variados com custos reduzidos e maior flexibilidade.</p>
+  
+        <strong>Benefícios da tecnologia</strong><br>
+        <ul>
+            <li><strong>Treinamento acelerado:</strong> Os robôs podem adquirir novas competências em menos tempo.</li>
+            <li><strong>Adaptação aprimorada:</strong> Eles aprendem a operar em diferentes condições sem necessidade de reconfigurações mecânicas.</li>
+            <li><strong>Eficiência industrial:</strong> O uso dessa tecnologia melhora a produtividade, permitindo produções personalizadas e mais autônomas.</li>
+        </ul>
+  
+        <strong>Empresas pioneiras</strong><br>
+        <p>Empresas como EPF e Siemens já utilizam essa abordagem, projetando robôs que se adaptam a diversas geometrias e desafios industriais.</p>
+  
+        <p>Essa inovação promete transformar o setor industrial, criando robôs capazes de executar tarefas de forma independente e eficiente, baseados no conhecimento adquirido em simulações.</p>
+        <p>Com robôs mais adaptáveis e autônomos, o futuro da automação industrial se torna ainda mais promissor.</p>
+    </div>
+  </div>
+
+  <!-- Modal 9 -->
+<div id="modal9" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>"Sol Artificial" da China Dobra Recorde de Fusão Nuclear</h2>
+        <img src="https://classic.exame.com/wp-content/uploads/2023/04/reator.webp" alt="Imagem representativa do Sol Artificial da China">
+        
+        <p>O reator Supercondutor Avançado Experimental Tokamak (EAST), conhecido como "Sol artificial" da China, estabeleceu um novo marco na fusão nuclear ao manter um plasma superquente confinado por 1.066 segundos. O recorde mais que dobrou o tempo anterior de 403 segundos, também alcançado pelo próprio EAST, aproximando a fusão nuclear de uma aplicação comercial viável.</p>
+  
+        <strong>Como funciona a fusão nuclear?</strong><br>
+        <p>A fusão nuclear é o mesmo processo que ocorre no núcleo do Sol: átomos leves se fundem, formando um mais pesado e liberando energia. Na Terra, como não há a pressão gravitacional do Sol, reatores precisam gerar temperaturas extremamente altas para replicar o fenômeno.</p>
+        <p>Os reatores tokamak, como o EAST, utilizam campos magnéticos poderosos para manter o plasma confinado em uma câmara em formato de rosquinha, impedindo que o material superaquecido toque as paredes do reator.</p>
+  
+        <strong>Por que esse avanço importa?</strong><br>
+        <p>A fusão nuclear é uma promessa de energia limpa, praticamente ilimitada, sem emissões de gases do efeito estufa ou resíduos nucleares significativos. Embora ainda consuma mais energia do que gera, o EAST deu um passo importante para superar esse obstáculo com melhorias no sistema de aquecimento e maior estabilidade do plasma.</p>
+        <p>O objetivo futuro, segundo Song Yuntao, diretor do Instituto de Física de Plasma da Academia Chinesa de Ciências, é atingir operações estáveis por milhares de segundos, permitindo uma fusão autossustentável — a chamada ignição.</p>
+  
+        <strong>Impacto global e colaboração internacional</strong><br>
+        <p>O sucesso do EAST não beneficia apenas a China. Projetos como o Reator Termonuclear Experimental Internacional (ITER), em construção na França, aproveitam os avanços dessa pesquisa. O ITER, que reúne esforços de dezenas de países, incluindo EUA, Reino Unido e Japão, tem previsão de iniciar operações em 2039 e será o maior experimento de fusão nuclear da história.</p>
+  
+        <strong>Desafios e futuro da fusão nuclear</strong><br>
+        <p>Embora os avanços sejam promissores, alcançar uma fusão nuclear comercial ainda depende de superar desafios técnicos significativos, incluindo o consumo energético elevado dos reatores. No entanto, a colaboração científica global reforça as chances de sucesso na busca por uma fonte de energia sustentável para o futuro.</p>
+        <p>O recorde do "Sol artificial" chinês marca um passo importante nesse caminho, consolidando a fusão nuclear como uma solução potencial para a crise energética e climática global.</p>
+    </div>
+  </div>
+  
+  <!-- Modal 10 -->
+<div id="modal10" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Tecnologia Inovadora Usa Pele Humana para Carregar Dispositivos</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/Destaque-Bateria-pele-humana-1920x1080.jpg" alt="Imagem representativa do Power-Over-Skin">
+        
+        <p>Pesquisadores da Universidade Carnegie Mellon (EUA) apresentaram o Power-Over-Skin, uma tecnologia revolucionária que utiliza a pele humana como meio para transmitir energia elétrica a dispositivos. O sistema tem o potencial de alimentar wearables, como smartwatches, fones de ouvido e monitores de saúde, sem a necessidade de baterias convencionais.</p>
+  
+        <strong>Como funciona o Power-Over-Skin?</strong><br>
+        <p>A tecnologia utiliza correntes elétricas que viajam pela pele de forma segura, sem causar choques. Inspirada no funcionamento do rádio, que usa o ar como meio de transmissão, o Power-Over-Skin utiliza o tecido corporal como condutor entre o transmissor (alimentado por bateria) e os receptores, que podem estar embutidos em dispositivos como anéis ou brincos com LEDs.</p>
+        <ul>
+            <li><strong>Energia eficiente:</strong> O corpo humano transmite frequências de rádio de 40 MHz com baixa perda de energia para o ar.</li>
+            <li><strong>Onda quadrada:</strong> Os pesquisadores descobriram que a transmissão com ondas quadradas – pulsos de energia semelhantes a liga/desliga – aumenta a eficiência da transmissão em comparação com ondas senoidais.</li>
+        </ul>
+  
+        <strong>Demonstração e resultados</strong><br>
+        <p>Durante os testes, dispositivos foram colocados em diferentes partes do corpo, como pulsos e tornozelos, demonstrando que quanto mais próximo o receptor estivesse do transmissor, maior a energia recebida. A tecnologia já conseguiu energizar dispositivos de baixa potência, como brincos com LEDs.</p>
+  
+        <strong>O futuro do carregamento pela pele</strong><br>
+        <p>Embora ainda em estágio inicial, os pesquisadores veem grande potencial no Power-Over-Skin. O próximo objetivo é aumentar a potência transmitida em até 10 vezes, o suficiente para carregar dispositivos como fones de ouvido.</p>
+        <p>“A capacidade de energizar dispositivos maiores será um marco para expandir as aplicações da tecnologia, como trackers fitness e wearables mais robustos”, afirmou Andy Kong, pesquisador líder do projeto.</p>
+  
+        <strong>Impacto e possibilidades</strong><br>
+        <p>O Power-Over-Skin pode redefinir o mercado de dispositivos móveis e wearables, reduzindo a dependência de baterias convencionais. A tecnologia, que ainda precisa ser aprimorada para suportar maior potência, representa um passo importante na busca por soluções mais práticas e sustentáveis para o carregamento de dispositivos no dia a dia.</p>
+        <p>Com avanços como este, a ideia de um mundo "sem baterias" parece cada vez menos ficção científica e mais próxima da realidade.</p>
+    </div>
+  </div>
+  
+  <!-- Modal 11 -->
+<div id="modal11" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Materiais 2D Prometem Revolução nos Semicondutores</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/semicondutores-1920x1080.jpg" alt="Imagem representativa sobre materiais 2D e semicondutores">
+        
+        <p>Pesquisadores da Universidade de Buffalo, nos EUA, estão investigando a combinação de materiais bidimensionais (2D) com silício para criar semicondutores mais compactos, eficientes e poderosos. Publicada na revista ACS Nano, a pesquisa marca um avanço significativo na nanoeletrônica, que sustenta dispositivos como smartphones, computadores e ferramentas médicas.</p>
+  
+        <strong>O que são materiais 2D e por que são promissores?</strong><br>
+        <p>Materiais 2D, como o dissulfeto de molibdênio (MoS2) e o grafeno, são ultrafinos — com espessuras inferiores a um nanômetro — e apresentam propriedades únicas. Eles permitem:</p>
+        <ul>
+            <li><strong>Eficiência energética:</strong> Melhor controle na condução de cargas elétricas, reduzindo a resistência.</li>
+            <li><strong>Miniaturização:</strong> Produção de componentes menores e mais poderosos, essenciais para dispositivos modernos.</li>
+        </ul>
+  
+        <strong>Como funciona a integração com silício?</strong><br>
+        <p>A abordagem utiliza camadas ultrafinas de materiais 2D combinadas com estruturas de silício para melhorar o transporte de carga elétrica. Esses materiais complementam semicondutores convencionais ao reduzir perdas de energia e melhorar o desempenho em dispositivos complexos, como transistores de três terminais.</p>
+        <p>Os testes também mostraram que, sob certas condições, materiais como o nitreto de boro hexagonal (h-BN) atuam como camadas quase invisíveis, reduzindo a resistência sem comprometer o desempenho.</p>
+  
+        <strong>Desafios e próximos passos</strong><br>
+        <p>Apesar do potencial, há barreiras a serem superadas. Segundo o professor Huamin Li, ainda é necessário entender melhor os mecanismos de transporte de carga na interface entre materiais 2D e 3D.</p>
+        <p>A colaboração internacional — envolvendo pesquisadores da China, Coreia, Áustria e Itália — destaca a relevância global da pesquisa em semicondutores e reforça a expectativa de aplicações comerciais nos próximos anos.</p>
+  
+        <p>Com esses avanços, os semicondutores 2D prometem abrir caminho para dispositivos mais compactos, energeticamente eficientes e de alto desempenho, redefinindo os padrões da tecnologia moderna.</p>
+    </div>
+  </div>
+  
+  <!-- Modal 12 -->
+<div id="modal12" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Maior Usina Solar do Mundo Vai Operar 24 Horas por Dia em Abu Dhabi</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/painis-solares-1920x1080.jpg" alt="Imagem representativa da maior usina solar do mundo em Abu Dhabi">
+        
+        <p>Um projeto inovador em Abu Dhabi, nos Emirados Árabes Unidos, está redefinindo os padrões da energia limpa. A maior usina solar do mundo, atualmente em construção, será a primeira capaz de operar de forma ininterrupta, produzindo energia mesmo durante a noite.</p>
+  
+        <strong>Características do projeto</strong><br>
+        <ul>
+            <li><strong>Dimensão colossal:</strong> A usina terá mais de 52 km², equivalente a 7 mil campos de futebol.</li>
+            <li><strong>Capacidade de produção:</strong> Contará com 10 milhões de painéis solares, gerando 1 GW de energia por dia, suficiente para abastecer 750 mil residências.</li>
+            <li><strong>Funcionamento 24/7:</strong> Graças à combinação de geração solar convencional e um avançado sistema de armazenamento por baterias, a usina será capaz de produzir energia continuamente, mesmo sem luz solar.</li>
+        </ul>
+  
+        <strong>Investimento e prazo</strong><br>
+        <p><strong>Custo total:</strong> O projeto exige um investimento de US$ 6 bilhões (mais de R$ 35 bilhões).<br>
+        <strong>Conclusão:</strong> A previsão é que a construção seja finalizada em 2027.</p>
+  
+        <strong>Comparação global</strong><br>
+        <p>Atualmente, a maior usina solar do mundo está localizada em Xinjiang, na China, com capacidade de 3,5 GW. Apesar disso, a planta de Abu Dhabi se destaca pela operação ininterrupta, representando um marco para o setor de energia renovável.</p>
+  
+        <p>Com iniciativas como essa, os Emirados Árabes Unidos mostram o potencial da energia solar como uma alternativa viável aos combustíveis fósseis, contribuindo para um futuro mais sustentável e alinhado aos desafios da crise climática.</p>
+    </div>
+  </div>
+
+  <!-- Modal 13 -->
+<div id="modal13" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Elon Musk Ameaça Retaliar Senadores que Votarem Contra Indicações de Trump</h2>
+        <img src="https://s2-g1.glbimg.com/4unQC_YvgolrjD-oTSwdxT2Ywdk=/0x0:4715x3108/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/o/n/14q7A2QaibuftNRtdL0A/2025-01-21t140100z-1219518565-rc2xdca4xlhx-rtrmadp-3-usa-trump-inauguration.jpg" alt="Imagem representativa do conflito político envolvendo Elon Musk e o Senado dos EUA">
+        
+        <p>Elon Musk, agora chefe do Departamento de Eficiência Governamental no governo Trump, está gerando polêmica ao ameaçar senadores que se opuserem às indicações do presidente para cargos-chave. Segundo a revista Time, Musk planeja usar um Super Comitê de Ação Política (Super PAC) para financiar campanhas de oposição contra os senadores que rejeitarem os indicados.</p>
+  
+        <strong>Conflito político e senadores sob pressão</strong><br>
+        <ul>
+            <li><strong>Cargos em disputa:</strong> Mais de 50 indicados por Trump precisam da aprovação do Senado, incluindo secretários para áreas como Defesa e Saúde.</li>
+            <li><strong>Apoio dividido:</strong> Apesar do Partido Republicano ter maioria no Senado (53 de 100 cadeiras), alguns indicados enfrentam resistências internas, como Pete Hegseth, indicado para a Defesa, acusado de má conduta e questionado por falta de qualificação.</li>
+            <li><strong>Ameaças de Musk:</strong> O bilionário investiu US$ 200 milhões na campanha de Trump e promete retaliar economicamente os senadores que não apoiarem os indicados do presidente.</li>
+        </ul>
+  
+        <strong>Conflito de interesses e críticas</strong><br>
+        <p>A nomeação de Musk como responsável por analisar gastos governamentais levantou preocupações sobre possíveis conflitos de interesse. Como proprietário da Tesla e SpaceX, empresas que possuem contratos com o governo, Musk terá acesso a informações sensíveis de agências federais, gerando críticas sobre transparência e ética.</p>
+  
+        <strong>Cenário político tenso</strong><br>
+        <p>Com mais de um terço do Senado em renovação nas eleições de 2026, as ameaças de Musk aumentam a pressão sobre senadores, especialmente republicanos. Embora controversa, essa estratégia reforça o papel de Musk como peça-chave na administração Trump, tanto política quanto economicamente.</p>
+        
+        <p>A postura do bilionário intensifica as divisões em torno das nomeações de Trump, destacando a influência crescente de grandes financiadores no cenário político dos Estados Unidos.</p>
+    </div>
+  </div>
+  
+  <!-- Modal 14 -->
+<div id="modal14" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Banimento do TikTok nos EUA Leva Usuários a Buscarem VPN – com Pouco Sucesso</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2024/08/tiktok-e1726494815684-1920x1080.jpg" alt="Imagem representativa do banimento do TikTok nos EUA">
+        
+        <p>O TikTok foi oficialmente banido nos Estados Unidos no domingo (19), deixando milhões de usuários sem acesso à popular rede social. Com isso, houve uma explosão nas buscas por “TikTok VPN” e “como burlar o bloqueio do TikTok”, mas a tentativa de contornar a proibição usando VPNs não tem apresentado os resultados esperados.</p>
+  
+        <strong>Por que as VPNs não funcionam bem para o TikTok?</strong><br>
+        <p>As VPNs são ferramentas que permitem alterar o endereço IP do usuário, conectando-o a um servidor em outro país onde o TikTok ainda está disponível. No entanto, muitos usuários relatam que o método não está funcionando devido a:</p>
+        <ul>
+            <li><strong>Bloqueios avançados do TikTok:</strong> A plataforma pode identificar acessos suspeitos e restringi-los mesmo com VPN.</li>
+            <li><strong>Sobrecarga de serviços de VPN:</strong> O aumento no tráfego gerado por usuários tentando acessar o TikTok causou instabilidade em serviços como o NordVPN, que apresentou um pico de reclamações no Downdetector.</li>
+        </ul>
+  
+        <strong>Alternativas e reações</strong><br>
+        <p>Sem sucesso com VPNs, muitos usuários estão migrando para redes sociais semelhantes, como Threads e Bluesky, repetindo o fenômeno ocorrido no Brasil durante a suspensão temporária do X (antigo Twitter) em 2024.</p>
+        <p>Além disso, memes e desabafos inundaram a internet, destacando a frustração de quem não conseguiu contornar o bloqueio.</p>
+  
+        <strong>Perspectivas para o TikTok nos EUA</strong><br>
+        <p>Do lado político, o presidente eleito Donald Trump indicou que pode adiar o banimento do TikTok por 90 dias após sua posse, o que reacendeu a esperança dos usuários. Segundo Trump, a extensão seria “apropriada” para buscar uma solução definitiva.</p>
+        <p>Enquanto isso, o futuro do TikTok nos EUA segue incerto, e os usuários tentam se adaptar a outras plataformas enquanto aguardam um desfecho político para o caso.</p>
+    </div>
+  </div>
+  
+  <!-- Modal 15 -->
+<div id="modal15" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Mudança na Faixa de 6 GHz Gera Polêmica entre Anatel e Provedores de Internet</h2>
+        <img src="https://tm.ibxk.com.br/2025/01/24/24181404240006.jpg?ims=1280x480" alt="Imagem representativa da disputa pela faixa de 6 GHz no Brasil">
+        
+        <p>A decisão da Anatel de dividir a faixa de 6 GHz entre redes Wi-Fi e telefonia móvel está gerando controvérsia no setor de telecomunicações. Antes exclusiva para o Wi-Fi, essa faixa agora será compartilhada, com 60% destinada às operadoras móveis, preparando o terreno para a chegada do 6G na próxima década.</p>
+  
+        <strong>O que muda com a decisão?</strong><br>
+        <ul>
+            <li><strong>Leilão de 6 GHz:</strong> A partir de 2026, a radiofrequência será leiloada para operadoras de telefonia móvel, restringindo seu uso por provedores de internet.</li>
+            <li><strong>Modelo adotado:</strong> Segue os padrões de China e União Europeia, que planejam o uso misto da faixa. Contrasta com os EUA, que reservam toda a faixa de 6 GHz exclusivamente para Wi-Fi.</li>
+        </ul>
+  
+        <strong>Impactos e reações</strong><br>
+        <ul>
+            <li><strong>Provedores de internet:</strong> A Abrint (Associação Brasileira de Provedores de Internet) critica a decisão, argumentando que ela prejudica a inclusão digital e limita a capacidade de redes Wi-Fi, que respondem por 90% do tráfego de internet no Brasil.</li>
+            <li><strong>População e escolas:</strong> A entidade alerta que a mudança impactará populações de baixa renda e escolas públicas, que dependem de conexões Wi-Fi acessíveis.</li>
+        </ul>
+  
+        <strong>Próximos passos e disputa legal</strong><br>
+        <p>A Abrint protocolou um pedido de anulação junto à Anatel, solicitando a manutenção da faixa para uso não licenciado. O caso será analisado pela procuradoria da agência antes de ser submetido ao conselho.</p>
+  
+        <strong>Contexto internacional e futuro</strong><br>
+        <p>Enquanto os EUA defendem o uso integral da faixa para Wi-Fi, empresas como Meta destacam a necessidade de altas taxas de transferência de dados para tecnologias avançadas. Por outro lado, a decisão da Anatel alinha o Brasil com mercados globais que já priorizam a integração entre Wi-Fi e 6G, mirando avanços tecnológicos.</p>
+  
+        <p>A disputa reflete um dilema entre inovação tecnológica e a manutenção de acessibilidade digital, impactando diretamente o futuro da conectividade no Brasil.</p>
+    </div>
+  </div>
+
+  <!-- Modal 16 -->
+<div id="modal16" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Samsung Reduz pela Metade Investimentos em Fabricação de Chips</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2024/12/shutterstock_2521120403-1920x1080.jpg" alt="Imagem representativa da fabricação de chips pela Samsung">
+        
+        <p>A Samsung anunciou um corte drástico em seus investimentos na fabricação de chips para 2025, reduzindo o orçamento de US$ 6,9 bilhões para US$ 3,4 bilhões – uma diminuição de mais de 50%. A decisão reflete uma resposta às dificuldades enfrentadas pela empresa e a busca por tecnologias mais avançadas para se manter competitiva.</p>
+  
+        <strong>Razões para o corte</strong><br>
+        <ul>
+            <li><strong>Queda nas encomendas:</strong> A Samsung Foundry enfrenta desafios para atrair grandes clientes devido a problemas com baixas taxas de rendimento e atrasos em processos de fabricação avançados.</li>
+            <li><strong>Fracasso no 3nm GAA:</strong> A tecnologia de 3nm Gate-All-Around, anunciada como uma inovação, apresentou taxas de rendimento abaixo de 20%, impactando negativamente a produção.</li>
+            <li><strong>Foco no futuro:</strong> A empresa planeja priorizar tecnologias de ponta, como litografias de 2nm e 1,4nm, voltadas para aplicações em inteligência artificial e dispositivos de alto desempenho.</li>
+        </ul>
+  
+        <strong>Impactos e preocupações</strong><br>
+        <p>Embora a Samsung acredite que o foco em processos mais avançados pode atrair clientes de alto nível no futuro, especialistas apontam riscos. Há temores de que a gigante sul-coreana fique para trás em relação aos concorrentes, como TSMC, que já domina o mercado de semicondutores de ponta.</p>
+  
+        <strong>Crise e promessa de superação</strong><br>
+        <p>A Samsung reconheceu publicamente sua "grave situação" em um comunicado assinado pelo vice-presidente Jun Young-hyun, assumindo a responsabilidade pelos desafios. A empresa destacou seu compromisso em:</p>
+        <ul>
+            <li>Restaurar a competitividade tecnológica.</li>
+            <li>Promover inovação para transformar a crise em oportunidade.</li>
+            <li>Revisar métodos de trabalho e corrigir falhas organizacionais.</li>
+        </ul>
+  
+        <p>Apesar das dificuldades atuais, a Samsung aposta na reinvenção e no foco em tecnologias de próxima geração para recuperar sua posição de liderança no setor de semicondutores. A transição, no entanto, será desafiadora e crucial para seu futuro competitivo.</p>
+    </div>
+  </div>
+  
+  <!-- Modal 17 -->
+<div id="modal17" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Trump Assume e NASA Pode Passar por Transformações Significativas</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2024/08/sls-block-1b-1536x892.jpg" alt="Imagem representativa das mudanças na NASA sob o governo Trump">
+        
+        <p>Com a posse de Donald Trump para um novo mandato, mudanças profundas são esperadas na NASA. A indicação do bilionário Jared Isaacman, veterano de missões espaciais privadas da SpaceX, para o cargo de administrador, e a nomeação de Elon Musk para um cargo na administração, reforçam o papel crescente das empresas privadas na exploração espacial americana.</p>
+  
+        <strong>Marte no radar, Lua em xeque</strong><br>
+        <p>O futuro do programa Artemis, que visa levar humanos de volta à Lua, pode estar ameaçado. Musk já sugeriu que o foco da NASA deveria ser Marte, considerando a Lua uma “distração”. No entanto, o Congresso americano mantém forte apoio ao programa Artemis, dificultando mudanças radicais.</p>
+        <ul>
+            <li><strong>Situação atual do Artemis:</strong><br>
+                <ul>
+                    <li>A Artemis 3, planejada para usar o foguete SLS e a Starship como módulo de pouso, enfrenta atrasos e desafios técnicos.</li>
+                    <li>Bilhões de dólares já foram investidos no programa, tornando sua suspensão improvável sem grande resistência política.</li>
+                </ul>
+            </li>
+            <li><strong>Marte como objetivo:</strong><br>
+                Musk e Isaacman podem tentar redirecionar os esforços para missões ao planeta vermelho, alinhados à visão de longo prazo de explorar Marte diretamente.</li>
+        </ul>
+  
+        <strong>O futuro do foguete SLS</strong><br>
+        <p>O Sistema de Lançamento Espacial (SLS), o megafoguete descartável da NASA, também está sob escrutínio.</p>
+        <ul>
+            <li>Musk critica o SLS, promovendo a Starship, que ele considera mais avançada e econômica.</li>
+            <li>Especialistas acreditam que versões futuras do SLS, como o Block 1B, podem ser canceladas em favor de alternativas comerciais, mas o foguete dificilmente será totalmente abandonado devido ao apoio do Congresso.</li>
+        </ul>
+  
+        <strong>Impacto das empresas privadas na NASA</strong><br>
+        <p>Com Isaacman e Musk em posições estratégicas, a colaboração público-privada na exploração espacial pode se intensificar. Empresas como a SpaceX podem ganhar maior protagonismo, mas mudanças profundas ainda dependem da aprovação do Congresso, que tradicionalmente apoia uma abordagem equilibrada entre iniciativas públicas e comerciais.</p>
+  
+        <strong>Cenário político e tecnológico</strong><br>
+        <p>Trump, Musk e Isaacman formam um trio que pode redefinir a exploração espacial dos EUA, mas o sucesso de suas ambições dependerá de negociações políticas e da superação de desafios técnicos. As próximas decisões terão impacto direto não apenas na NASA, mas no futuro da exploração espacial global.</p>
+    </div>
+  </div>
+  
+  <!-- Modal 18 -->
+<div id="modal18" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>5 Avanços Tecnológicos que Marcaram 2024</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/cientista-alterando-dna-1920x1080.png" alt="Imagem representativa dos avanços tecnológicos de 2024">
+        
+        <p>O ano de 2024 trouxe inovações significativas que transformaram diversas áreas, desde conectividade até saúde e mobilidade. Confira os cinco maiores avanços tecnológicos que impactaram o mundo.</p>
+  
+        <strong>1. Consolidação do 5G e início do 6G no Brasil</strong><br>
+        <p>O 5G foi amplamente implementado no Brasil, revolucionando setores como telemedicina, conectividade em áreas remotas e automação de veículos. Paralelamente, pesquisas para o 6G começaram, prometendo velocidades ainda maiores e integração com inteligência artificial para conexões mais inteligentes e eficientes.</p>
+  
+        <strong>2. Avanços na Computação Quântica</strong><br>
+        <p>A computação quântica atingiu novos patamares em 2024. O computador quântico H2-1, da Quantinuum, superou em mais de 100 vezes a capacidade do Sycamore, do Google. Essa tecnologia trouxe soluções para problemas complexos, como otimização e modelagem molecular, demonstrando seu potencial revolucionário.</p>
+  
+        <strong>3. Terapia de Células T contra Tumores Sólidos</strong><br>
+        <p>A FDA aprovou a Tecelra, primeira terapia celular geneticamente modificada para combater tumores sólidos. Os testes mostraram eficácia em 44% dos pacientes, representando um avanço crucial na biotecnologia e no tratamento do câncer.</p>
+  
+        <strong>4. Expansão dos Carros Elétricos e Autônomos no Brasil</strong><br>
+        <p>O mercado brasileiro de veículos sustentáveis avançou em 2024, com maior adesão a carros elétricos graças a incentivos governamentais e melhorias na infraestrutura de recarga. Além disso, projetos-piloto de veículos semiautônomos começaram a operar em algumas cidades, colocando o país na rota da automação veicular.</p>
+  
+        <strong>5. Uso Amplificado da IA Generativa</strong><br>
+        <p>A IA Generativa ganhou destaque em áreas como marketing, educação e criação de conteúdos. Ferramentas como o GPT-4.5 facilitaram a automação de tarefas e a personalização de experiências. No entanto, também levantaram preocupações sobre criatividade humana e riscos de uso indevido.</p>
+  
+        <p>Esses avanços mostram como 2024 foi um ano de inovações marcantes, consolidando tecnologias que continuarão a impactar nossas vidas em 2025 e nos anos seguintes.</p>
+    </div>
+  </div>
+  
+<!-- Modal 19 -->
+<div id="modal19" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>5 Recursos Úteis que Sumiram dos Celulares Modernos</h2>
+        <img src="https://t.ctcdn.com.br/F3TMtbXMqQZlLgap-T5S31dNG5g=/1024x576/smart/i972443.jpeg" alt="Imagem representativa dos recursos removidos de smartphones">
+        
+        <p>Os smartphones evoluíram para verdadeiras centrais multimídia, mas essa modernização veio com sacrifícios. Diversos recursos úteis, antes comuns, desapareceram em nome do design, custos ou mudanças no comportamento do consumidor. Confira os cinco recursos mais lamentados pelos usuários:</p>
+  
+        <strong>1. Entrada P2 (3,5 mm)</strong><br>
+        <p>A porta para fones de ouvido com fio foi extinta em muitos smartphones após 2016, quando Motorola e Apple abriram o caminho. Apesar da popularidade dos fones Bluetooth, os modelos com fio ainda oferecem vantagens como melhor qualidade sonora, conexão estável e ausência de necessidade de recarga.</p>
+  
+        <strong>2. LED de Notificação</strong><br>
+        <p>O pequeno LED que indicava notificações sem precisar ligar a tela foi eliminado em prol de designs com telas maiores e mais limpas. Atualmente, apps ou funcionalidades integradas tentam substituir essa conveniência, mas sem a mesma praticidade.</p>
+  
+        <strong>3. Rádio FM</strong><br>
+        <p>O rádio FM, antes presente em vários celulares, desapareceu junto com a entrada P2, que servia como antena. Embora serviços de streaming tenham substituído a rádio tradicional, o recurso ainda é valorizado por sua acessibilidade e independência de internet, especialmente em emergências.</p>
+  
+        <strong>4. Slot para MicroSD</strong><br>
+        <p>Cartões MicroSD, populares para expandir o armazenamento de celulares, foram substituídos pelo foco em memórias internas maiores e mais rápidas. Hoje, alguns modelos oferecem apenas uma opção híbrida, forçando os usuários a escolher entre um segundo chip de operadora ou o cartão de memória.</p>
+  
+        <strong>5. Acessórios Inclusos</strong><br>
+        <p>Itens essenciais como fones de ouvido e carregadores foram removidos das caixas de smartphones. Embora justificado como uma medida sustentável, isso aumentou os custos para os consumidores, que agora precisam adquirir esses acessórios separadamente.</p>
+  
+        <p>Esses cortes, muitas vezes explicados como medidas para redução de custos ou avanços tecnológicos, continuam gerando nostalgia e discussão entre os consumidores. Afinal, a busca pela inovação também traz suas perdas.</p>
+    </div>
+  </div>
+  
+<!-- Modal 20 -->
+<div id="modal20" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Parcerias Globais em IA Mostram Cooperação Apesar de Tensões Geopolíticas</h2>
+        <img src="https://img.odcdn.com.br/wp-content/uploads/2025/01/shutterstock_1733696006.jpg" alt="Imagem representativa das colaborações globais em IA">
+        
+        <p>Apesar das rivalidades entre Estados Unidos e China, um estudo do Emerging Technology Observatory, da Universidade de Georgetown, revela que os dois países continuam liderando colaborações acadêmicas em inteligência artificial (IA). A pesquisa destaca o crescimento de parcerias globais e o papel de nações como Brasil, Índia e Japão no avanço da tecnologia.</p>
+  
+        <strong>Colaborações entre EUA e China em IA</strong><br>
+        <ul>
+            <li><strong>Áreas-chave:</strong> Os especialistas chineses e americanos colaboram principalmente em áreas como visão computacional.</li>
+            <li><strong>Tensões geopolíticas:</strong> Questões relacionadas à segurança nacional e imigração restringem o fluxo de talentos entre os dois países, mas a troca acadêmica permanece robusta.</li>
+        </ul>
+  
+        <strong>Brasil no Top 10 das Colaborações</strong><br>
+        <p>O Brasil ocupa a décima posição entre os países com maior número de parcerias internacionais em IA.</p>
+        <ul>
+            <li><strong>Principais parceiros:</strong> Pesquisadores brasileiros colaboram principalmente com EUA, Reino Unido, China, Portugal e França, além de Alemanha e Canadá.</li>
+            <li><strong>Impacto global:</strong> Essas colaborações contribuem para o desenvolvimento de soluções mais inclusivas e que atendam diferentes contextos sociais.</li>
+        </ul>
+  
+        <strong>Desafios e Iniciativas Globais</strong><br>
+        <ul>
+            <li><strong>Barreiras:</strong> Rivalidades tecnológicas, como a disputa EUA-China, dificultam colaborações e investimentos, como o aporte de US$ 1,4 bilhão da Microsoft no G42 dos Emirados Árabes.</li>
+            <li><strong>Proposta da ONU:</strong> A criação de um órgão internacional para regulamentar a IA busca mitigar riscos, promover cooperação e capacitar países em desenvolvimento.</li>
+        </ul>
+  
+        <p>O estudo evidencia que, apesar das tensões, a inovação em IA depende de parcerias globais. A intensificação dessas colaborações, especialmente entre países não ocidentais, é crucial para enfrentar desafios e aproveitar as oportunidades da IA no cenário mundial.</p>
+    </div>
+  </div>
+  
+
+  <!-- Rodapé -->
+  <footer>
+    <p>&copy; 2024 - 2025</p>
+  </footer>
+
+  <!-- Scripts para Modais -->
+  <script>
+    // Seleciona todos os cartões, modais e botões de fechamento
+    const cards = document.querySelectorAll('.card');
+    const modals = document.querySelectorAll('.modal');
+    const closes = document.querySelectorAll('.close');
+
+    // Verifica se a quantidade de cartões e modais corresponde
+    if (cards.length !== modals.length) {
+      console.warn("O número de cartões não corresponde ao número de modais. Verifique seu HTML.");
+    }
+
+    // Adiciona evento de clique aos cartões para abrir o modal correspondente
+    cards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+        if (modals[index]) {
+          modals[index].style.display = 'block'; // Exibe o modal correspondente
+        } else {
+          console.error(`Nenhum modal encontrado para o card com índice ${index}. Verifique o HTML.`);
+        }
+      });
+    });
+
+    // Adiciona evento de clique aos botões de fechamento para fechar o modal correspondente
+    closes.forEach((close, index) => {
+      close.addEventListener('click', () => {
+        if (modals[index]) {
+          modals[index].style.display = 'none'; // Esconde o modal correspondente
+        } else {
+          console.error(`Nenhum modal encontrado para o botão de fechamento com índice ${index}. Verifique o HTML.`);
+        }
+      });
+    });
+
+    // Adiciona funcionalidade para fechar o modal ao clicar fora dele
+    window.onclick = function (event) {
+      modals.forEach((modal) => {
+        if (event.target === modal) {
+          modal.style.display = 'none'; // Esconde o modal se o clique for fora do conteúdo
+        }
+      });
+    };
+
+    // Adiciona acessibilidade: fecha o modal ao pressionar a tecla ESC
+    window.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') { // Detecta a tecla ESC
+        modals.forEach((modal) => {
+          modal.style.display = 'none'; // Esconde todos os modais abertos
+        });
+      }
+    });
+  </script>
+</body>
+</html>
